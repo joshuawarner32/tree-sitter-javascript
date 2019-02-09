@@ -12,7 +12,7 @@ if (a) {
 ---
 
 (program
-  (if_statement (parenthesized_expression (identifier)) (statement_block
+  (if_statement (identifier) (statement_block
     (variable_declaration (variable_declarator (identifier) (identifier)))
     (expression_statement (call_expression (identifier) (arguments)))
     (expression_statement (call_expression (identifier) (arguments)))
@@ -33,16 +33,16 @@ if (a)
 ---
 (program
   (if_statement
-    (parenthesized_expression (identifier))
+    (identifier)
     (expression_statement
       (call_expression (identifier) (arguments))))
   (expression_statement (update_expression (identifier)))
 
   (if_statement
-    (parenthesized_expression (identifier))
+    (identifier)
     (expression_statement
       (call_expression (identifier) (arguments))))
-  (expression_statement (update_expression (identifier)))) 
+  (expression_statement (update_expression (identifier))))
 
 ==========================================
 property access across lines
@@ -156,7 +156,7 @@ if (a) {b} else {c}
 ---
 
 (program
-  (if_statement (parenthesized_expression (identifier))
+  (if_statement (identifier)
     (statement_block (expression_statement (identifier)))
     (statement_block (expression_statement (identifier)))))
 
@@ -213,29 +213,29 @@ if (p) { var q }
 ---
 
 (program
-  (if_statement (parenthesized_expression (identifier)) (statement_block
+  (if_statement (identifier) (statement_block
     (if_statement
-      (parenthesized_expression (identifier))
+      (identifier)
       (return_statement (identifier)))))
-  (if_statement (parenthesized_expression (identifier)) (statement_block
+  (if_statement (identifier) (statement_block
     (for_statement
       (empty_statement)
       (empty_statement)
       (break_statement))))
-  (if_statement (parenthesized_expression (identifier)) (statement_block
+  (if_statement (identifier) (statement_block
     (for_in_statement (identifier) (identifier)
       (break_statement))))
-  (if_statement (parenthesized_expression (identifier)) (statement_block
+  (if_statement (identifier) (statement_block
     (for_of_statement (identifier) (identifier)
       (continue_statement))))
-  (if_statement (parenthesized_expression (identifier)) (statement_block
-    (while_statement (parenthesized_expression (identifier))
+  (if_statement (identifier) (statement_block
+    (while_statement (identifier)
       (break_statement))))
-  (if_statement (parenthesized_expression (identifier)) (statement_block
+  (if_statement (identifier) (statement_block
     (do_statement
       (statement_block (expression_statement (identifier)))
-      (parenthesized_expression (identifier)))))
-  (if_statement (parenthesized_expression (identifier)) (statement_block
+      (identifier))))
+  (if_statement (identifier) (statement_block
     (variable_declaration (variable_declarator (identifier))))))
 
 =====================================================

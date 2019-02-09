@@ -445,8 +445,13 @@ class Foo {
     (decorator (identifier))
     (identifier)
     (class_body
-      (decorator (call_expression (member_expression (identifier) (property_identifier)) (arguments (identifier))))
-      (method_definition (property_identifier) (formal_parameters) (statement_block)))))
+      (method_definition
+        (decorator (call_expression
+          (member_expression (identifier) (property_identifier))
+          (arguments (identifier))))
+        (property_identifier)
+        (formal_parameters)
+        (statement_block)))))
 
 ============================================
 Arrays
@@ -1126,7 +1131,7 @@ if (foo - bar) /baz/;
       (parenthesized_expression (binary_expression (identifier) (identifier)))
       (identifier)))
   (if_statement
-    (parenthesized_expression (binary_expression (identifier) (identifier)))
+    (binary_expression (identifier) (identifier))
     (expression_statement (regex (regex_pattern))))
   (expression_statement
     (binary_expression

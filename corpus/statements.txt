@@ -127,10 +127,10 @@ if (a.b) {
 ----
 
 (program
-  (if_statement (parenthesized_expression (identifier))
+  (if_statement (identifier)
     (expression_statement (call_expression
       (identifier) (arguments (identifier)))))
-  (if_statement (parenthesized_expression (member_expression (identifier) (property_identifier)))
+  (if_statement (member_expression (identifier) (property_identifier))
     (statement_block
       (expression_statement (call_expression
         (identifier) (arguments (identifier))))
@@ -155,11 +155,11 @@ if (a) {
 ----
 
 (program
-  (if_statement (parenthesized_expression (identifier))
+  (if_statement (identifier)
     (expression_statement (identifier))
-    (if_statement (parenthesized_expression (identifier))
+    (if_statement (identifier)
       (expression_statement (identifier))))
-  (if_statement (parenthesized_expression (identifier))
+  (if_statement (identifier)
     (statement_block
       (expression_statement (identifier))
       (expression_statement (identifier)))
@@ -312,7 +312,7 @@ while (a)
 ---
 
 (program
-  (while_statement (parenthesized_expression (identifier))
+  (while_statement (identifier)
     (expression_statement (call_expression (identifier) (arguments)))))
 
 ============================================
@@ -329,8 +329,8 @@ do a; while (b)
 (program
   (do_statement
     (statement_block (expression_statement (identifier)))
-    (parenthesized_expression (identifier)))
-  (do_statement (expression_statement (identifier)) (parenthesized_expression (identifier))))
+    (identifier))
+  (do_statement (expression_statement (identifier)) (identifier)))
 
 ============================================
 Return statements
@@ -491,7 +491,7 @@ switch (x) {
 ---
 
 (program
-  (switch_statement (parenthesized_expression (identifier)) (switch_body
+  (switch_statement (identifier) (switch_body
     (switch_case (number))
     (switch_case (number)
       (expression_statement (call_expression (identifier) (arguments)))
@@ -563,7 +563,7 @@ if (true) { ; };;;
 ---
 
 (program
-  (if_statement (parenthesized_expression (true)) (statement_block
+  (if_statement (true) (statement_block
     (empty_statement)))
   (empty_statement)
   (empty_statement)
@@ -590,7 +590,7 @@ for (;;) {
       (empty_statement)
       (empty_statement)
       (statement_block
-        (if_statement (parenthesized_expression (identifier))
+        (if_statement (identifier)
           (statement_block (break_statement (statement_identifier)))
           (statement_block (continue_statement (statement_identifier))))))))
 
@@ -613,7 +613,7 @@ with (x) { i; }
 
 ---
 
-(program (with_statement (parenthesized_expression (identifier)) (statement_block (expression_statement (identifier)))))
+(program (with_statement (identifier) (statement_block (expression_statement (identifier)))))
 
 ==========================================
 Hash bang lines
