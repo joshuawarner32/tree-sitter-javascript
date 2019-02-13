@@ -370,7 +370,7 @@
     }
   },
   "assignment_expression": {
-    "target": {
+    "left": {
       "multiple": false,
       "required": true,
       "types": [
@@ -412,7 +412,7 @@
         }
       ]
     },
-    "value": {
+    "right": {
       "multiple": false,
       "required": true,
       "types": [
@@ -572,7 +572,7 @@
     }
   },
   "assignment_pattern": {
-    "pattern": {
+    "left": {
       "multiple": false,
       "required": true,
       "types": [
@@ -590,7 +590,7 @@
         }
       ]
     },
-    "value": {
+    "right": {
       "multiple": false,
       "required": true,
       "types": [
@@ -750,41 +750,7 @@
     }
   },
   "augmented_assignment_expression": {
-    "target": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "kind": "async",
-          "named": false
-        },
-        {
-          "kind": "get",
-          "named": false
-        },
-        {
-          "kind": "identifier",
-          "named": true
-        },
-        {
-          "kind": "member_expression",
-          "named": true
-        },
-        {
-          "kind": "set",
-          "named": false
-        },
-        {
-          "kind": "static",
-          "named": false
-        },
-        {
-          "kind": "subscript_expression",
-          "named": true
-        }
-      ]
-    },
-    "value": {
+    "right": {
       "multiple": false,
       "required": true,
       "types": [
@@ -944,7 +910,7 @@
     }
   },
   "await_expression": {
-    "operand": {
+    "argument": {
       "multiple": false,
       "required": true,
       "types": [
@@ -1104,7 +1070,7 @@
     }
   },
   "binary_expression": {
-    "left_operand": {
+    "left": {
       "multiple": false,
       "required": true,
       "types": [
@@ -1360,7 +1326,7 @@
         }
       ]
     },
-    "right_operand": {
+    "right": {
       "multiple": false,
       "required": true,
       "types": [
@@ -1752,7 +1718,7 @@
         }
       ]
     },
-    "id": {
+    "name": {
       "multiple": false,
       "required": true,
       "types": [
@@ -2072,7 +2038,7 @@
         }
       ]
     },
-    "id": {
+    "name": {
       "multiple": false,
       "required": true,
       "types": [
@@ -2236,170 +2202,6 @@
         },
         {
           "kind": "regex",
-          "named": true
-        },
-        {
-          "kind": "set",
-          "named": false
-        },
-        {
-          "kind": "static",
-          "named": false
-        },
-        {
-          "kind": "string",
-          "named": true
-        },
-        {
-          "kind": "subscript_expression",
-          "named": true
-        },
-        {
-          "kind": "template_string",
-          "named": true
-        },
-        {
-          "kind": "ternary_expression",
-          "named": true
-        },
-        {
-          "kind": "this",
-          "named": true
-        },
-        {
-          "kind": "true",
-          "named": true
-        },
-        {
-          "kind": "unary_expression",
-          "named": true
-        },
-        {
-          "kind": "undefined",
-          "named": true
-        },
-        {
-          "kind": "update_expression",
-          "named": true
-        },
-        {
-          "kind": "yield_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  "expression_statement": {
-    "expression": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "kind": "anonymous_class",
-          "named": true
-        },
-        {
-          "kind": "array",
-          "named": true
-        },
-        {
-          "kind": "arrow_function",
-          "named": true
-        },
-        {
-          "kind": "assignment_expression",
-          "named": true
-        },
-        {
-          "kind": "async",
-          "named": false
-        },
-        {
-          "kind": "augmented_assignment_expression",
-          "named": true
-        },
-        {
-          "kind": "await_expression",
-          "named": true
-        },
-        {
-          "kind": "binary_expression",
-          "named": true
-        },
-        {
-          "kind": "call_expression",
-          "named": true
-        },
-        {
-          "kind": "class",
-          "named": true
-        },
-        {
-          "kind": "false",
-          "named": true
-        },
-        {
-          "kind": "function",
-          "named": true
-        },
-        {
-          "kind": "generator_function",
-          "named": true
-        },
-        {
-          "kind": "get",
-          "named": false
-        },
-        {
-          "kind": "identifier",
-          "named": true
-        },
-        {
-          "kind": "jsx_element",
-          "named": true
-        },
-        {
-          "kind": "jsx_fragment",
-          "named": true
-        },
-        {
-          "kind": "jsx_self_closing_element",
-          "named": true
-        },
-        {
-          "kind": "member_expression",
-          "named": true
-        },
-        {
-          "kind": "meta_property",
-          "named": true
-        },
-        {
-          "kind": "new_expression",
-          "named": true
-        },
-        {
-          "kind": "null",
-          "named": true
-        },
-        {
-          "kind": "number",
-          "named": true
-        },
-        {
-          "kind": "object",
-          "named": true
-        },
-        {
-          "kind": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "kind": "regex",
-          "named": true
-        },
-        {
-          "kind": "sequence_expression",
           "named": true
         },
         {
@@ -3038,6 +2840,112 @@
     }
   },
   "for_statement": {
+    "body": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "kind": "break_statement",
+          "named": true
+        },
+        {
+          "kind": "class",
+          "named": true
+        },
+        {
+          "kind": "continue_statement",
+          "named": true
+        },
+        {
+          "kind": "debugger_statement",
+          "named": true
+        },
+        {
+          "kind": "do_statement",
+          "named": true
+        },
+        {
+          "kind": "empty_statement",
+          "named": true
+        },
+        {
+          "kind": "export_statement",
+          "named": true
+        },
+        {
+          "kind": "expression_statement",
+          "named": true
+        },
+        {
+          "kind": "for_in_statement",
+          "named": true
+        },
+        {
+          "kind": "for_of_statement",
+          "named": true
+        },
+        {
+          "kind": "for_statement",
+          "named": true
+        },
+        {
+          "kind": "function",
+          "named": true
+        },
+        {
+          "kind": "generator_function",
+          "named": true
+        },
+        {
+          "kind": "if_statement",
+          "named": true
+        },
+        {
+          "kind": "import_statement",
+          "named": true
+        },
+        {
+          "kind": "labeled_statement",
+          "named": true
+        },
+        {
+          "kind": "lexical_declaration",
+          "named": true
+        },
+        {
+          "kind": "return_statement",
+          "named": true
+        },
+        {
+          "kind": "statement_block",
+          "named": true
+        },
+        {
+          "kind": "switch_statement",
+          "named": true
+        },
+        {
+          "kind": "throw_statement",
+          "named": true
+        },
+        {
+          "kind": "try_statement",
+          "named": true
+        },
+        {
+          "kind": "variable_declaration",
+          "named": true
+        },
+        {
+          "kind": "while_statement",
+          "named": true
+        },
+        {
+          "kind": "with_statement",
+          "named": true
+        }
+      ]
+    },
     "condition": {
       "multiple": false,
       "required": true,
@@ -3248,7 +3156,7 @@
         }
       ]
     },
-    "id": {
+    "name": {
       "multiple": false,
       "required": false,
       "types": [
@@ -3280,7 +3188,7 @@
         }
       ]
     },
-    "id": {
+    "name": {
       "multiple": false,
       "required": false,
       "types": [
@@ -4174,7 +4082,7 @@
         }
       ]
     },
-    "id": {
+    "name": {
       "multiple": false,
       "required": true,
       "types": [
@@ -4234,7 +4142,7 @@
         }
       ]
     },
-    "id": {
+    "name": {
       "multiple": false,
       "required": true,
       "types": [
@@ -4994,9 +4902,331 @@
     }
   },
   "return_statement": {
-    "value": {
+    "argument": {
       "multiple": false,
       "required": false,
+      "types": [
+        {
+          "kind": "anonymous_class",
+          "named": true
+        },
+        {
+          "kind": "array",
+          "named": true
+        },
+        {
+          "kind": "arrow_function",
+          "named": true
+        },
+        {
+          "kind": "assignment_expression",
+          "named": true
+        },
+        {
+          "kind": "async",
+          "named": false
+        },
+        {
+          "kind": "augmented_assignment_expression",
+          "named": true
+        },
+        {
+          "kind": "await_expression",
+          "named": true
+        },
+        {
+          "kind": "binary_expression",
+          "named": true
+        },
+        {
+          "kind": "call_expression",
+          "named": true
+        },
+        {
+          "kind": "class",
+          "named": true
+        },
+        {
+          "kind": "false",
+          "named": true
+        },
+        {
+          "kind": "function",
+          "named": true
+        },
+        {
+          "kind": "generator_function",
+          "named": true
+        },
+        {
+          "kind": "get",
+          "named": false
+        },
+        {
+          "kind": "identifier",
+          "named": true
+        },
+        {
+          "kind": "jsx_element",
+          "named": true
+        },
+        {
+          "kind": "jsx_fragment",
+          "named": true
+        },
+        {
+          "kind": "jsx_self_closing_element",
+          "named": true
+        },
+        {
+          "kind": "member_expression",
+          "named": true
+        },
+        {
+          "kind": "meta_property",
+          "named": true
+        },
+        {
+          "kind": "new_expression",
+          "named": true
+        },
+        {
+          "kind": "null",
+          "named": true
+        },
+        {
+          "kind": "number",
+          "named": true
+        },
+        {
+          "kind": "object",
+          "named": true
+        },
+        {
+          "kind": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "kind": "regex",
+          "named": true
+        },
+        {
+          "kind": "sequence_expression",
+          "named": true
+        },
+        {
+          "kind": "set",
+          "named": false
+        },
+        {
+          "kind": "static",
+          "named": false
+        },
+        {
+          "kind": "string",
+          "named": true
+        },
+        {
+          "kind": "subscript_expression",
+          "named": true
+        },
+        {
+          "kind": "template_string",
+          "named": true
+        },
+        {
+          "kind": "ternary_expression",
+          "named": true
+        },
+        {
+          "kind": "this",
+          "named": true
+        },
+        {
+          "kind": "true",
+          "named": true
+        },
+        {
+          "kind": "unary_expression",
+          "named": true
+        },
+        {
+          "kind": "undefined",
+          "named": true
+        },
+        {
+          "kind": "update_expression",
+          "named": true
+        },
+        {
+          "kind": "yield_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  "sequence_expression": {
+    "left": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "kind": "anonymous_class",
+          "named": true
+        },
+        {
+          "kind": "array",
+          "named": true
+        },
+        {
+          "kind": "arrow_function",
+          "named": true
+        },
+        {
+          "kind": "assignment_expression",
+          "named": true
+        },
+        {
+          "kind": "async",
+          "named": false
+        },
+        {
+          "kind": "augmented_assignment_expression",
+          "named": true
+        },
+        {
+          "kind": "await_expression",
+          "named": true
+        },
+        {
+          "kind": "binary_expression",
+          "named": true
+        },
+        {
+          "kind": "call_expression",
+          "named": true
+        },
+        {
+          "kind": "class",
+          "named": true
+        },
+        {
+          "kind": "false",
+          "named": true
+        },
+        {
+          "kind": "function",
+          "named": true
+        },
+        {
+          "kind": "generator_function",
+          "named": true
+        },
+        {
+          "kind": "get",
+          "named": false
+        },
+        {
+          "kind": "identifier",
+          "named": true
+        },
+        {
+          "kind": "jsx_element",
+          "named": true
+        },
+        {
+          "kind": "jsx_fragment",
+          "named": true
+        },
+        {
+          "kind": "jsx_self_closing_element",
+          "named": true
+        },
+        {
+          "kind": "member_expression",
+          "named": true
+        },
+        {
+          "kind": "meta_property",
+          "named": true
+        },
+        {
+          "kind": "new_expression",
+          "named": true
+        },
+        {
+          "kind": "null",
+          "named": true
+        },
+        {
+          "kind": "number",
+          "named": true
+        },
+        {
+          "kind": "object",
+          "named": true
+        },
+        {
+          "kind": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "kind": "regex",
+          "named": true
+        },
+        {
+          "kind": "set",
+          "named": false
+        },
+        {
+          "kind": "static",
+          "named": false
+        },
+        {
+          "kind": "string",
+          "named": true
+        },
+        {
+          "kind": "subscript_expression",
+          "named": true
+        },
+        {
+          "kind": "template_string",
+          "named": true
+        },
+        {
+          "kind": "ternary_expression",
+          "named": true
+        },
+        {
+          "kind": "this",
+          "named": true
+        },
+        {
+          "kind": "true",
+          "named": true
+        },
+        {
+          "kind": "unary_expression",
+          "named": true
+        },
+        {
+          "kind": "undefined",
+          "named": true
+        },
+        {
+          "kind": "update_expression",
+          "named": true
+        },
+        {
+          "kind": "yield_expression",
+          "named": true
+        }
+      ]
+    },
+    "right": {
+      "multiple": true,
+      "required": true,
       "types": [
         {
           "kind": "anonymous_class",
@@ -6474,7 +6704,7 @@
     }
   },
   "throw_statement": {
-    "value": {
+    "argument": {
       "multiple": false,
       "required": true,
       "types": [
@@ -6670,7 +6900,7 @@
     }
   },
   "unary_expression": {
-    "operand": {
+    "argument": {
       "multiple": false,
       "required": true,
       "types": [
@@ -6864,7 +7094,7 @@
     }
   },
   "update_expression": {
-    "operand": {
+    "argument": {
       "multiple": false,
       "required": true,
       "types": [
@@ -7038,7 +7268,7 @@
     }
   },
   "variable_declarator": {
-    "id": {
+    "name": {
       "multiple": false,
       "required": true,
       "types": [
@@ -7756,7 +7986,7 @@
     }
   },
   "yield_expression": {
-    "value": {
+    "argument": {
       "multiple": false,
       "required": false,
       "types": [

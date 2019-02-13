@@ -110,7 +110,15 @@ export class Foo {
 
 ---
 
-(program (export_statement (decorator (call_expression (identifier) (arguments))) (class (identifier) (class_body))))
+(program
+  (export_statement
+    decorator: (decorator
+      (call_expression
+        function: (identifier)
+        arguments: (arguments)))
+    (class
+      name: (identifier)
+      body: (class_body))))
 
 ============================================
 If statements
@@ -127,14 +135,23 @@ if (a.b) {
 ----
 
 (program
-  (if_statement (identifier)
-    (expression_statement (call_expression
-      (identifier) (arguments (identifier)))))
-  (if_statement (member_expression (identifier) (property_identifier))
-    (statement_block
-      (expression_statement (call_expression
-        (identifier) (arguments (identifier))))
-      (expression_statement (identifier)))))
+  (if_statement
+    condition: (identifier)
+    consequence: (expression_statement
+      (call_expression
+        function: (identifier)
+        arguments: (arguments (identifier)))))
+  (if_statement
+    condition: (member_expression
+      object: (identifier)
+      property: (property_identifier))
+    consequence: (statement_block
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (arguments (identifier))))
+      (expression_statement
+        (identifier)))))
 
 ============================================
 If-else statements
@@ -155,15 +172,18 @@ if (a) {
 ----
 
 (program
-  (if_statement (identifier)
-    (expression_statement (identifier))
-    (if_statement (identifier)
-      (expression_statement (identifier))))
-  (if_statement (identifier)
-    (statement_block
+  (if_statement
+    condition: (identifier)
+    consequence: (expression_statement (identifier))
+    alternative: (if_statement
+      condition: (identifier)
+      consequence: (expression_statement (identifier))))
+  (if_statement
+    condition: (identifier)
+    consequence: (statement_block
       (expression_statement (identifier))
       (expression_statement (identifier)))
-    (statement_block
+    alternative: (statement_block
       (expression_statement (identifier)))))
 
 ============================================
@@ -190,33 +210,46 @@ for (var i = 0
 
 (program
   (for_statement
-    (variable_declaration
-      (variable_declarator (identifier))
-      (variable_declarator (identifier)))
-    (expression_statement (identifier))
-    (identifier)
-    (expression_statement (identifier)))
+    initializer: (variable_declaration
+      (variable_declarator name: (identifier))
+      (variable_declarator name: (identifier)))
+    condition: (expression_statement (identifier))
+    increment: (identifier)
+    body: (expression_statement (identifier)))
 
   (for_statement
-    (expression_statement (sequence_expression
-      (assignment_expression (identifier) (number))
-      (call_expression (identifier) (arguments))))
-    (expression_statement (binary_expression (identifier) (number)))
-    (update_expression (identifier))
-    (expression_statement (call_expression (identifier) (arguments (identifier)))))
+    initializer: (expression_statement (sequence_expression
+      left: (assignment_expression
+        left: (identifier)
+        right: (number))
+      right: (call_expression
+        function: (identifier)
+        arguments: (arguments))))
+    condition: (expression_statement (binary_expression
+      left: (identifier)
+      right: (number)))
+    increment: (update_expression argument: (identifier))
+    body: (expression_statement (call_expression
+      function: (identifier)
+      arguments: (arguments (identifier)))))
 
   (for_statement
-    (empty_statement)
-    (empty_statement)
-    (statement_block
+    initializer: (empty_statement)
+    condition: (empty_statement)
+    body: (statement_block
       (expression_statement (identifier))
       (continue_statement)))
 
   (for_statement
-    (variable_declaration (variable_declarator (identifier) (number)))
-    (expression_statement (binary_expression (identifier) (identifier)))
-    (update_expression (identifier))
-    (expression_statement (object))))
+    initializer: (variable_declaration (variable_declarator
+      name: (identifier)
+      value: (number)))
+    condition: (expression_statement (binary_expression
+      left: (identifier)
+      right: (identifier)))
+    increment: (update_expression
+      argument: (identifier))
+    body: (expression_statement (object))))
 
 ============================================
 For-in statements

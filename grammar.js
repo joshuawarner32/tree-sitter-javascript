@@ -111,7 +111,7 @@ module.exports = grammar({
     ),
 
     _import_export_specifier: $ => seq(
-      field('id', $.identifier),
+      field('name', $.identifier),
       optional(seq(
         'as',
         field('alias', $.identifier)
@@ -205,7 +205,7 @@ module.exports = grammar({
     ),
 
     expression_statement: $ => seq(
-      field('expression', $._expressions),
+      $._expressions,
       $._semicolon
     ),
 
@@ -224,7 +224,7 @@ module.exports = grammar({
     ),
 
     variable_declarator: $ => seq(
-      field('id', choice($.identifier, $._destructuring_pattern)),
+      field('name', choice($.identifier, $._destructuring_pattern)),
       optional($._initializer)
     ),
 
@@ -269,7 +269,7 @@ module.exports = grammar({
       )),
       field('increment', optional($._expressions)),
       ')',
-      $._statement
+      field('body', $._statement)
     ),
 
     for_in_statement: $ => seq(
@@ -347,13 +347,13 @@ module.exports = grammar({
 
     return_statement: $ => seq(
       'return',
-      optional(field('value', $._expressions)),
+      optional(field('argument', $._expressions)),
       $._semicolon
     ),
 
     throw_statement: $ => seq(
       'throw',
-      field('value', $._expressions),
+      field('argument', $._expressions),
       $._semicolon
     ),
 
@@ -431,7 +431,7 @@ module.exports = grammar({
 
     yield_expression: $ => prec.right(seq(
       'yield',
-      optional(field('value', $._expression))
+      optional(field('argument', $._expression))
     )),
 
     object: $ => prec(PREC.OBJECT, seq(
@@ -450,11 +450,12 @@ module.exports = grammar({
     )),
 
     assignment_pattern: $ => seq(
-      field('pattern', choice(
+      field('left', choice(
         alias($.identifier, $.shorthand_property_identifier),
         $._destructuring_pattern
       )),
-      $._initializer
+      '=',
+      field('right', $._expression)
     ),
 
     array: $ => seq(
@@ -566,7 +567,7 @@ module.exports = grammar({
     class: $ => seq(
       repeat(field('decorator', $.decorator)),
       'class',
-      field('id', $.identifier),
+      field('name', $.identifier),
       optional($.class_heritage),
       field('body', $.class_body)
     ),
@@ -576,7 +577,7 @@ module.exports = grammar({
     function: $ => seq(
       optional('async'),
       'function',
-      field('id', optional($.identifier)),
+      field('name', optional($.identifier)),
       field('parameters', $.formal_parameters),
       field('body', $.statement_block)
     ),
@@ -597,7 +598,7 @@ module.exports = grammar({
     generator_function: $ => seq(
       'function',
       '*',
-      field('id', optional($.identifier)),
+      field('name', optional($.identifier)),
       field('parameters', $.formal_parameters),
       field('body', $.statement_block)
     ),
@@ -642,7 +643,7 @@ module.exports = grammar({
 
     await_expression: $ => seq(
       'await',
-      field('operand', $._expression)
+      field('argument', $._expression)
     ),
 
     member_expression: $ => prec(PREC.MEMBER, seq(
@@ -662,25 +663,26 @@ module.exports = grammar({
     )),
 
     assignment_expression: $ => prec.right(PREC.ASSIGN, seq(
-      field('target', choice(
+      field('left', choice(
         $.member_expression,
         $.subscript_expression,
         $.identifier,
         alias($._reserved_identifier, $.identifier),
         $._destructuring_pattern
       )),
-      $._initializer
+      '=',
+      field('right', $._expression)
     )),
 
     augmented_assignment_expression: $ => prec.right(PREC.ASSIGN, seq(
-      field('target', choice(
+      field('right', choice(
         $.member_expression,
         $.subscript_expression,
         alias($._reserved_identifier, $.identifier),
         $.identifier
       )),
       choice('+=', '-=', '*=', '/=', '%=', '^=', '&=', '|=', '>>=', '>>>=', '<<='),
-      field('value', $._expression)
+      field('right', $._expression)
     )),
 
     _initializer: $ => seq(
@@ -706,9 +708,9 @@ module.exports = grammar({
     binary_expression: $ => choice(
       // Avoid a conflict between `for_in_statement` and the `in` operator
       prec.left(PREC.REL, seq(
-        field('left_operand', choice($.identifier, $.object, $.array)),
+        field('left', choice($.identifier, $.object, $.array)),
         field('operator', 'in'),
-        field('right_operand', $._expression)
+        field('right', $._expression)
       )),
 
       ...[
@@ -737,9 +739,9 @@ module.exports = grammar({
         ['in', PREC.REL],
       ].map(([operator, precedence]) =>
         prec.left(precedence, seq(
-          field('left_operand', $._expression),
+          field('left', $._expression),
           field('operator', operator),
-          field('right_operand', $._expression)
+          field('right', $._expression)
         ))
       )
     ),
@@ -755,26 +757,26 @@ module.exports = grammar({
     ].map(([operator, precedence]) =>
       prec.left(precedence, seq(
         field('operator', operator),
-        field('operand', $._expression)
+        field('argument', $._expression)
       ))
     )),
 
     update_expression: $ => prec.left(PREC.INC, choice(
       seq(
-        field('operand', $._expression),
+        field('argument', $._expression),
         field('operator', choice('++', '--'))
       ),
       seq(
         field('operator', choice('++', '--')),
-        field('operand', $._expression)
+        field('argument', $._expression)
       ),
     )),
 
     sequence_expression: $ => prec(PREC.COMMA, seq(
-      $._expression,
+      field('left', $._expression),
       ',',
-      choice($.sequence_expression, $._expression))
-    ),
+      field('right', choice($.sequence_expression, $._expression))
+    )),
 
     //
     // Primitives
@@ -995,7 +997,7 @@ module.exports = grammar({
       optional('static'),
       optional('async'),
       optional(choice('get', 'set', '*')),
-      field('id', $._property_name),
+      field('name', $._property_name),
       field('parameters', $.formal_parameters),
       field('body', $.statement_block)
     ),
